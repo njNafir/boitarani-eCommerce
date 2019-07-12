@@ -3,6 +3,7 @@
 ecommerce/settings/local.py
 static_my_proj
 static_my_scss
+static_cdn/compressed
 
 # addresses/
 
