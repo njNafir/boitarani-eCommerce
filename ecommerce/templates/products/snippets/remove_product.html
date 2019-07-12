@@ -1,0 +1,7 @@
+<div class="cart_update" id="cart-update-js">
+	<form class="my-2 my-lg-0" method="POST" action="{% url 'cart_update' %}" data-endpoint="{% url 'cart_update' %}">
+		<input class="form-control mr-sm-2 product_id" type="hidden" name="product_id" value="{{ product_id }}">
+			<button type="submit" class="btn btn-warning mt-2 ml-0" style="border-radius: 0rem !important;">Remove</button>
+		{% csrf_token %}
+	</form>
+</div>

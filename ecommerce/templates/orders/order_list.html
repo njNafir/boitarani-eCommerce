@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}My order and details...{% endblock title %}
+
+{% block content %}
+
+<div class="cart-wrapper container">
+	<div class="row">
+		<div class="col">
+			<h1 class="title text-center">{{ title }}</h1>
+				<div class="cart_order_list">
+					<table class="table my-5">
+						<thead class="table-head">
+							<th class="table-head">Descending</th>
+							<th class="table-head">Order Id</th>
+							<th class="table-head">Status</th>
+						</thead>
+						<tbody class="tbody">
+							{% for order in object_list %}
+								<tr class="table-row order">
+									<td class="table_data order-price">{{ forloop.counter }}</td>
+									<td class="table_data"><a href="{{ order.get_absolute_url }}" class="order-id">{{ order.order_id }}</a></td>
+									<td class="table_data">{{ order.get_status }}</td>
+								</tr>	
+							{% empty %}
+								<tr class="table-row order">
+									<td class="table_data text-center" colspan="3">No order yet<hr></td>
+								</tr>							
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,194 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %} home page {% endblock title %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'compressed/boots/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ecomapp/css/base.css' %}">
+		{% block staticcss %}
+
+		{% endblock staticcss %}
+	</head>
+	<body>
+		{% block navbar %}
+
+			{% include 'base/navbar.html' with brand='eCommerce' %}
+
+		{% endblock navbar %}
+		{% block content %}
+			<div class="text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-md-8 mx-auto">
+							<div class="form-wrapper">
+								<h2 class="title">Form</h2>
+								<form class="new-content-form" method="POST" action="/some/url/list/">
+									<textarea class="form-control"></textarea>
+									<input type="submit" name="submit" class="btn btn-success my-3">
+								</form>
+								<table class="table">
+									<thead>
+										<th>Content</th>
+									</thead>
+									<tbody>
+										<td class="formDataSub"></td>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h1 class="display-1">Home Page!</h1>
+				<h1 class="heading" id="heading-one">Heading Heading!</h1>
+				<h2 class="heading">Heading Heading!</h2>
+				<h3 class="heading">Heading Heading!</h3>
+				<h4 class="heading">Heading Heading!</h4>
+				<h5 class="heading">Heading Heading!</h5>
+				<h6 class="heading">Heading Heading!</h6>
+				<p class="description">ectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris facere voluntate liceret: sese habere. Magna pars studiorum, prodita quaerimus. Magna pars studiorum, prodita quaerimus. Fabio vel iudice vincam, sunt in culpa qui officia. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Lorem ipsum dolor Lorem ipsum dolor sit amet, co</p>
+				<p class="description"><a href="#">Ankor tag inside description</a></p>
+				<p class="description">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris facere voluntate liceret: sese habere. Magna pars studiorum, prodita quaerimus. Magna pars studiorum, prodita quaerimus. Fabio vel iudice vincam, sunt in culpa qui officia. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Lorem ipsum dolor 
+				Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris facere voluntate liceret: sese habere. Magna pars studiorum, prodita quaerimus. Magna pars studiorum, prodita quaerimus. Fabio vel iudice vincam, sunt in culpa qui officia. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Lorem ipsum dolor 
+
+				</p>
+			</div>
+
+		{% endblock content %}
+		<script type="text/javascript" src="{% static 'compressed/js/jquery-3.3.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'compressed/js/popper.min.js' %}"></script>
+
+<!-- 		<script type="text/javascript">
+			$(document).ready(function(){
+				var a = 12345
+				var b = 12354
+				var d = 12354
+				var c = 'this is string'
+				var theArray = [a, b, c]
+				var somBool = true // false
+
+				$.each(theArray, function(index, obj){
+					console.log(index, obj)
+					if(obj%2 == 0 && somBool){
+						console.log(obj, 'is even and true')
+					}
+					else if(obj%3 == 0 && somBool){
+						console.log(obj, 'is devidable by 3 and true')
+					}
+					else{
+						console.log(obj, 'is not even')
+					}
+				})
+			})
+		</script> -->
+
+		<script>
+			$(document).ready(function(){
+				// So jquery is ready to roll
+				// $(selector).option(function(){})
+				// alert("Hi")
+				// $('body').css('background-color', '#4E4E4E')
+				setTimeout(function(){
+					// $('body').css('background-color', '#4E4E4E')
+				}, 350)
+				$('.heading').css('color', '#cacaca').text('heading heading!')
+				$('#heading-one').css('font-weight', 'bold')
+				$('.heading:nth-child(4)').css('color', 'black')
+
+				var $description = $('.description')
+				$description.css('width', '300px').css('height', '300px').css('padding', '30px 12px') //.css('overflow', 'scroll')
+				console.log($description.length)
+				console.log($description.css('height'))
+				console.log($description.height())
+			})
+		</script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var descriptionItem = $('.description')
+				$.each(descriptionItem, function(index, obj){
+					var item = $(this)
+					console.log(item)
+					console.log(item[0])
+					var actualHeight = item[0].scrollHeight
+					var shouldBeHeight = item.height()
+					console.log(actualHeight, shouldBeHeight)
+					if (actualHeight > shouldBeHeight + 60){
+						item.css('overflow-y', 'scroll')
+					}
+				})
+				console.log(descriptionItem)
+			})
+		</script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var headerOne = $('#heading-one')
+				console.log(headerOne)
+				headerOne.click(function(event){
+					var $this = $(this)
+					alert($this)
+					console.log($this[0])
+					console.log('I am')
+					console.log(event)
+					window.location.href = 'http://localhost/local.sunset.com/'
+				})
+
+				var descriptionLinks = $('.description a')
+				descriptionLinks.click(function(event){
+					console.log(event)
+					event.preventDefault()
+					var $this = $(this)
+					var href = $this.attr('href')
+					console.log(href)
+					alert(href)
+					window.location.href = 'http://localhost/local.sunset.com/'
+				})
+			})
+		</script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var contentForm = $('.new-content-form')
+				contentForm.submit(function(event){
+					event.preventDefault()
+					var $that = $(this)
+					var $method = $that.attr('method')
+					var $action = $that.attr('action')
+					var $textArea = $that.find('textarea')
+					var data = {
+						'method':$method,
+						'action':$action,
+						'content':$textArea
+					}
+
+					$('.table').find('.formDataSub').text($method + ', ' + $action + ', ' + $textArea.val())
+					$textArea.val('')
+
+					console.log($method)
+					console.log($action)
+					console.log($textArea.val())
+				})
+			})
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+		
+		<script type="text/javascript" src="{% static 'compressed/boots/js/bootstrap.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ecomapp/js/base.js' %}"></script>
+		{% block staticjs %}
+
+		{% endblock staticjs %}
+	</body>
+</html>

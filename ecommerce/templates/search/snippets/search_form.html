@@ -1,0 +1,8 @@
+<form class="my-3 search_form" id="search-form" method="GET" action="{{ search }}">
+	<div class="input-group bg-warning px-1">
+		<input class="form-control" type="text" name="search" aria-label="Search" placeholder="Search in boitoroni by catagory and products" value="{{ request.GET.search }}">
+		<span class="input-group-btn">
+			<button type="submit" class="btn btn-outline-warning mt-1 text-white"> <i class="fas fa-search"></i></button>
+		</span>
+	</div>
+</form>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if title %}{{ title }}{% else %}User detail update page{% endif %}{% endblock title %}
+
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-8 col-lg-6 mx-auto">
+
+				<div class="update_form_title">
+					{% if title %}
+						<h2 class="title my-3">{{ title }}</h2>
+					{% endif %}
+				</div>
+				<form class="form my-4" action="{% if action_url %}{{ action_url }}{% endif %}" method="POST">
+					{% if next_url %}
+						<input type="hidden" name="next" value="{{ next_url }}">
+					{% endif %}
+					{{ form.as_p }}
+					{% csrf_token %}
+					<label for="email">Email (Not changable) :</label>
+					<input type="text" name="email" id="email" class="form-control" value="{{ object }}" disabled="disabled">
+					<input type="submit" name="submit" class="btn btn-secondary my-4 py-2 px-4" value="Submit">
+					<a href="{% url 'password_reset' %}">reset password?</a>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

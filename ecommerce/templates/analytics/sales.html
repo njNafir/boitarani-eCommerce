@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{% if title %}{{ title }}{% else %}Sales analytics....{% endif %}{% endblock title %}
+
+{% block content %}
+
+<div class="cart-wrapper container">
+	<div class="row">
+		<div class="col text-center">
+			<h1 class="title text-center my-2 py-2">{{ title }}</h1>
+			<div class="staff_admin_order_view">
+				<h2 class="title my-5">Today order, paid and shipped.</h2>
+				<hr><hr>
+				{% include 'analytics/snippets/table.html' with bys=today title="Today Order" %}
+				<h2 class="title my-5">This week orders, paids and shippeds.</h2>
+				<hr><hr><hr>
+				{% include 'analytics/snippets/table.html' with bys=this_week title="This Week Orders" %}
+				<h2 class="title my-5">Last four week orders, paids and shippeds.</h2>
+				<hr><hr>
+				{% include 'analytics/snippets/table.html' with bys=last_four_week title="Last Four Week Orders" %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block staticjs %}
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+		<script type="text/javascript" src="{% static 'compressed/js/Chart.bundle.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ecomapp/js/chart-custom.js' %}"></script> -->
+
+{% endblock staticjs %}

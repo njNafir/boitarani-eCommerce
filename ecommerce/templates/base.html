@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %} home page {% endblock title %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="{% static 'compressed/boots/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'compressed/css/all.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'compressed/css/jquery-confirm.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ecomapp/css/base.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ecomapp/css/stripe-custom.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'b.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ecomapp/css/check.css' %}">
+		{% block staticcss %}
+
+		{% endblock staticcss %}
+	</head>
+	<body>
+		{% block navbar %}
+
+			{% include 'base/navbar.html' %}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-8 col-lg-6 mx-auto">
+						{% if messages %}
+							<div class="alert alert-success text-center messages">
+							    {% for message in messages %}
+								    <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+								    	{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+								        {{ message }}
+								    </div>
+							    {% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+		{% endblock navbar %}
+		{% block content %}
+
+		{% endblock content %}
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.1/jsrender.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.2/jsrender.min.js"></script>
+		<script src="https://js.stripe.com/v3/"></script>
+<!-- 
+		<script type="text/javascript" src="{% static 'compressed/js/jquery-3.3.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'compressed/js/popper.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'compressed/boots/js/bootstrap.min.js' %}"></script> -->
+		<!-- <script type="text/javascript" src="{% static 'compressed/js/stripe.js' %}"></script> 
+		This is impossible because stripe js must be loaded from js.stripe.com
+		-->
+		
+		{% include 'billing/snippets/method.html' %}
+<!-- 
+		<script type="text/javascript" src="{% static 'compressed/js/jquery-confirm.js' %}"></script>
+		<script type="text/javascript" src="{% static 'compressed/js/jsrender.min.js' %}"></script> -->
+		<script type="text/javascript" src="{% static 'ecomapp/js/csrf.ajax.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ecomapp/js/base.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ecomapp/js/stripe-custom.js' %}"></script>
+		
+		{% block staticjs %}
+
+		{% endblock staticjs %}
+	</body>
+
+</html>

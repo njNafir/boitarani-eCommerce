@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Featured product details{% endblock title %}
+
+{% block content %}
+	
+	<div class="container">
+		<div class="featured_product_list_page">
+			<a href="{% url 'featured_product_list' %}">...Back to main page..</a>
+		</div>
+		<div class="featured_product_details">
+			<div class="row">
+				<div class="col">
+					<div class="product">
+						<header class="product_header">
+							<h1 class="title">{{ product.title }}</h1>
+							{% if product.image %}
+								{{ product.image.url }}
+								<img src="{{ product.image.url }}" class="img-fluid">
+							{% endif %}
+						</header>
+						<div class="product_body">
+							<p class="description">{{ product.description|linebreaks }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

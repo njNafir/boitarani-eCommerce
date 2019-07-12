@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="cart-wrapper container">
+	<div class="row">
+		<div class="col">
+			<h1 class="title text-center">{{ title }}</h1>
+			{% if cart.products.exists %}
+				<div class="cart_product_list">
+					<table class="table my-5">
+						<thead class="table-head">
+							<th class="table-head">Product Number</th>
+							<th class="table-head">Product Name</th>
+							<th class="table-head">Product Price</th>
+						</thead>
+						<tbody class="tbody">
+							{% for product in cart.products.all %}
+								<tr class="table-row product">
+									<td class="table_data forloop-counter">{{ forloop.counter }}</td>
+									<td class="table_data"><a href="{{ product.get_product_detail_url }}" class="product-title">{{ product.title }}</a>
+									{% include 'products/snippets/remove_product.html' with product_id=product.id %}
+									</td>
+									<td class="table_data product-price">{{ product.price }}</td>
+								</tr>							
+							{% endfor %}
+								<tr class="table-row">
+									<td class="table_data text-left" colspan="2">Subtotal</td>
+									<td class="table_data"><span class="subtotal">{{ cart.subtotal }}</span></td>
+								</tr>
+								<tr class="table-row">
+									<td class="table_data text-left" colspan="2">Total</td>
+									<td class="table_data"><span class="total">{{ cart.total }}</span></td>
+								</tr>
+								<tr class="table-row">
+									<td class="table_data text-left"></td>
+									<td class="table_data text-left"><a class="btn btn-secondary" href="{% url 'ProductListView' %}">Add another</a></td>
+									<td class="table_data"><a class="btn btn-success" href="{% url 'checkout_home' %}">Checkout</a></td>
+								</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="cart-product-remove-form" style="display: none;">
+					{% include 'products/snippets/remove_product.html' %}
+				</div>
+			{% else %}
+				<div class="empty_cart">
+					<div class="empty_cart_content text-center">
+						<h2 class="title">Cart is empty.</h2>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

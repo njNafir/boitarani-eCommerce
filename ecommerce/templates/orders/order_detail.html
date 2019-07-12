@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Order {% if object.order_id %}{{ object.order_id }} {% endif %}details...{% endblock title %}
+
+{% block content %}
+	
+<div class="container">
+	{{ object.order_id }}  ---  {{ object.cart }}
+	<div class="row">
+		<div class="col">
+			<main class="order_main">
+				<header class="order_main_header text-center">
+					<h4 class="title">Order {% if object.order_id %}"{{ object.order_id }}" {% endif %}details...</h4>
+				</header>
+				<table class="table my-5">
+					<thead class="table-head">
+						<th class="table-head">Type</th>
+						<th class="table-head">Info</th>
+					</thead>
+					<tbody class="tbody">	
+						<tr class="table-row">
+							<td class="table-data">Shipping address</td>
+							<td class="table-data">{{ object.shipping_address.get_address }}</td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Billing address</td>
+							<td class="table-data">{{ object.billing_address.get_address }}</td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Cart products</td>
+							<td class="table-data">{% for product in object.cart.products.all %}{{ product }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Cart total</td>
+							<td class="table-data">{{ object.cart.total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Shipping total</td>
+							<td class="table-data">{{ object.shipping_total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Total</td>
+							<td class="table-data">{{ object.total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Status</td>
+							<td class="table-data">{{ object.get_status }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</main>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

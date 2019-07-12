@@ -1,0 +1,77 @@
+<div class="row flex my-5 py-2 text-center">
+	<div class="col-sm-12 col-lg-6 mx-auto">
+		<div class="recent_order_list">
+			<h2 class="title">{{ title }}.</h2>
+			<table class="table my-5">
+				<thead class="table-head">
+					<th class="table-head">Order Id</th>
+					<th class="table-head">Total : {% if bys.recent_orders_total.total__sum %}{{ bys.recent_orders_total.total__sum }}{% else %}0{% endif %}</th>
+					<th class="table-head">Last Update</th>
+				</thead>
+				<tbody class="tbody">
+					{% for order in bys.recent_order %}
+						<tr class="table-row object">
+							<td class="table_data order_id"><a href="{{ order.get_product_detail_url }}" class="order-id">{{ order.order_id }}</a></td>
+							<td class="table_data order_price">{{ order.total }}</td>
+							<td class="table_data order_update">{{ order.updated }}</td>
+						</tr>	
+					{% empty %}
+						<tr class="table-row object">
+							<td class="table_data text-center" colspan="3">No order yet<hr></td>
+						</tr>							
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12 col-lg-6 mx-auto">
+		<div class="paid_order_list">
+			<h2 class="title">Paid Order.</h2>
+			<table class="table my-5">
+				<thead class="table-head">
+					<th class="table-head">Order Id</th>
+					<th class="table-head">Total : {% if bys.recent_paid_orders_total.total__sum %}{{ bys.recent_paid_orders_total.total__sum }}{% else %}0{% endif %}</th>
+					<th class="table-head">Last Update</th>
+				</thead>
+				<tbody class="tbody">
+					{% for order in bys.paid_order %}
+						<tr class="table-row object">
+							<td class="table_data order_id"><a href="{{ order.get_product_detail_url }}" class="order-id">{{ order.order_id }}</a></td>
+							<td class="table_data order_price">{{ order.total }}</td>
+							<td class="table_data order_update">{{ order.updated }}</td>
+						</tr>	
+					{% empty %}
+						<tr class="table-row object">
+							<td class="table_data text-center" colspan="3">No order yet<hr></td>
+						</tr>							
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12 col-lg-6 mx-auto">
+		<div class="shipped_order_list">
+			<h2 class="title">Shipped Order.</h2>
+			<table class="table my-5">
+				<thead class="table-head">
+					<th class="table-head">Order Id</th>
+					<th class="table-head">Total : {% if bys.recent_shipped_orders_total.total__sum %}{{ bys.recent_shipped_orders_total.total__sum }}{% else %}0{% endif %}</th>
+					<th class="table-head">Last Update</th>
+				</thead>
+				<tbody class="tbody">
+					{% for order in bys.shipped_order %}
+						<tr class="table-row object">
+							<td class="table_data order_id"><a href="{{ order.get_product_detail_url }}" class="order-id">{{ order.order_id }}</a></td>
+							<td class="table_data order_price">{{ order.total }}</td>
+							<td class="table_data order_update">{{ order.updated }}</td>
+						</tr>	
+					{% empty %}
+						<tr class="table-row object">
+							<td class="table_data text-center" colspan="3">No order yet<hr/></td>
+						</tr>							
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}User account view and maintain..{% endblock title %}
+
+{% block content %}
+
+<style type="text/css">
+	div.col-md-6{
+		float: left !important;
+	}
+</style>
+
+<div class="container-fluid">
+	<div class="row">
+			{{ request.user }}
+		<div class="col-12 my-3">
+			<div class="col-12 col-md-6 my-3">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title">Services</h5>
+				    <div class="list-group">
+				    	<a href="{% url 'about_page' %}" class="list-group-item">About</a>
+				    	<a href="{% url 'contact_page' %}" class="list-group-item">Contact</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 my-3">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title">Billing</h5>
+				    <div class="list-group">
+				    	<a href="{% url 'about_page' %}" class="list-group-item">Billing address</a>
+				    	<a href="{% url 'payment_view' %}" class="list-group-item">Payment method</a>
+				    	<a href="{% url 'order_list' %}" class="list-group-item">Orders</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-12 col-md-6 my-3">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title">Preference</h5>
+				    <div class="list-group">
+				    	<a href="{% url 'update_detail' %}" class="list-group-item">Update details</a>
+				    	<a href="{% url 'password_change' %}" class="list-group-item">Change password</a>
+				    	<a href="{% url 'about_page' %}" class="list-group-item">Email change</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 my-3">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title">Notification</h5>
+				    <div class="list-group">
+				    	<a href="{% url 'marketing_pref' %}" class="list-group-item">Email newslatter</a>
+				    	<a href="{% url 'about_page' %}" class="list-group-item">Transactional email</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-12 col-md-6 my-3">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title">History</h5>
+				    <div class="list-group">
+				    	<a href="{% url 'user_history_product' %}" class="list-group-item">Product viewed</a>
+				    	<a href="{% url 'purchase_library' %}" class="list-group-item">Purchase library</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

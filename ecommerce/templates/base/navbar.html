@@ -1,0 +1,114 @@
+{% load staticfiles %}
+{% url 'home_page' as home %}
+{% url 'account_home' as account_home %}
+{% url 'ProductListView' as product %}
+{% url 'ProductDetailSlugView' as product_detail %}
+{% url 'featured_product_list' as featured %}
+{% url 'about_page' as about %}
+{% url 'contact_page' as contact %}
+{% url 'register_page' as register %}
+{% url 'login_page' as login %}
+{% url 'order_list' as order %}
+{% url 'logout_page' as logout %}
+{% url 'search_product' as search_product %}
+{% url 'search_featured_product' as featured_search %}
+{% url 'cart_home' as cart %}
+{% url 'payment_view' as payment_method %}
+{% url 'user_history_product' as user_history %}
+{% url 'purchase_library' as purchase_library %}
+
+<div class="container-fluid mx-1 mx-md-2 mx-lg-5">
+	<div class="col-12 mx-auto">
+		<div class="row">
+			<div class="col-12 col-md-3">
+				<a href="{% url 'home_page' %}" class="navbar-brand">{% if brand %}{{ brand }}{% else %}<img class="img-fluid" src="{% static 'img/FreeLogoDesign.png' %}" style="width: 164px;height: 64px;">{% endif %}</a>
+			</div>			
+			<div class="col-12 col-md-6 mx-auto">
+				{% if request.path == product or request.path == featured or request.path == search_product or request.path == featured_search or request.path == product_detail or request.path == home %}
+					{% if request.path == featured %}
+						{% include 'search/snippets/search_form.html' with search=featured_search %}
+					{% else %}
+						{% include 'search/snippets/search_form.html' with search=search_product %}
+					{% endif %}
+				{% endif %}
+			</div>
+			<div class="col-12 col-md-2 mx-auto">
+				<div class="row">
+					<div class="col-6 col-md-12 mx-auto">
+						<nav class="navbar navbar-expand navbar-light my-2" style="width: 100%;">
+							<div class="container">
+								<div class="collapse navbar-collapse" id="NavbarNav">
+									<ul class="navbar-nav mr-auto" >
+										{% if request.user.is_authenticated %}
+											 <!-- {% if request.path == logout %}active{% endif %} -->
+											<li class="nav-item btn btn-outline-warning py-1 mr-2" style="width: 100%;">
+												<a href="{{ logout }}" class="nav-link">Logout</a>
+											</li>
+										{% else %}
+											<li class="nav-item btn btn-outline-warning py-1 mr-2 {% if request.path == login %}active{% endif %}" style="width: 50%;">
+												<a href="{{ login }}" class="nav-link">Login</a>
+											</li>
+											<li class="nav-item btn btn-outline-warning py-1 mr-2 {% if request.path == register %}active{% endif %}" style="width: 50%;">
+												<a href="{{ register }}" class="nav-link">Register</a>
+											</li>
+										{% endif %}
+									</ul>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+</div>
+<div class="navbar_wrapper" id="navbar-wrapper">
+	<nav class="navbar navbar-expand-lg navbar-warning bg-warning mb-4">
+		<div class="container">
+			<button class="navbar-toggler w-100" type="button" data-toggle='collapse' data-target='#NavbarNav' aria-controls='NavbarNav'>
+				<span>Click to toggle navbar </span>
+			</button>
+			<div class="collapse navbar-collapse" id="NavbarNav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item {% if request.path == home %}active{% endif %}">
+						<a href="{{ home }}" class="nav-link">Home <span class="sr-only">(Current)</span></a>
+					</li>
+					<li class="nav-item {% if request.path == product %}active{% endif %}">
+						<a href="{{ product }}" class="nav-link">Product</a>
+					</li>
+					<li class="nav-item mr-auto {% if request.path == featured %}active{% endif %}">
+						<a href="{{ featured }}" class="nav-link">Featured</a>
+					</li>
+					<li class="nav-item {% if request.path == about %}active{% endif %}">
+						<a href="{{ about }}" class="nav-link">About</a>
+					</li>
+					<li class="nav-item {% if request.path == contact %}active{% endif %}">
+						<a href="{{ contact }}" class="nav-link">Contact</a>
+					</li>
+					<li class="nav-item {% if request.path == cart %}active{% endif %}">
+						<a href="{{ cart }}" class="nav-link"><span class="item_count" id="item-count">{{ request.session.cart_products }}</span> <i class="fas fa-shopping-cart"></i> Cart</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							My Account
+						</a>
+						<div class="dropdown-menu bg-warning" aria-labelledby="navbarDropdown" style="border-radius: 0rem;">
+							<a class="dropdown-item {% if request.path == account_home %}active{% endif %}" href="{{ account_home }}">Account home</a>
+							<!-- {% url 'login_page' %}?next={{ request.build_absolute_uri }} -->
+							<a class="dropdown-item {% if request.path == order %}active{% endif %}" href="{{ order }}">Order</a>
+							<a class="dropdown-item {% if request.path == user_history %}active{% endif %}" href="{{ user_history }}">History</a>
+							<a class="dropdown-item {% if request.path == purchase_library %}active{% endif %}" href="{{ purchase_library }}">Purchased</a>
+							<a class="dropdown-item" href="{% url 'login_page' %}">Notification</a>
+							<a class="dropdown-item {% if request.path == payment_method %}active{% endif %}" href="{{ payment_method }}">Payment method</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{{ logout }}">Logout</a>
+							<a class="dropdown-item" href="{% url 'login_page' %}">Another account</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>

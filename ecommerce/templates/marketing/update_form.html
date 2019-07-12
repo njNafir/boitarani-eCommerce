@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Get marketing email confirmation page {% endblock title %}
+
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-8 col-lg-6 mx-auto">
+
+				<div class="update_form_title">
+					{% if title %}
+						<h2 class="title my-3">{{ title }}</h2>
+					{% endif %}
+				</div>
+				<form class="form" action="{% if action_url %}{{ action_url }}{% endif %}" method="POST">
+					{% if next_url %}
+						<input type="hidden" name="next" value="{{ next_url }}">
+					{% endif %}
+					{{ form.as_p }}
+					{% csrf_token %}
+					<input type="submit" name="submit" class="btn btn-secondary mt-4 mb-5 py-2 px-4" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

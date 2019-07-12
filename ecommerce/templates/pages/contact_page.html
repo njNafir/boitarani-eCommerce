@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ title }}
+{% endblock title %}
+
+{% block content %}
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<h1 class="title">{{ content }}</h1>
+				{{ content }}
+			</div>
+		</div>
+	</div>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<form id="contact-form" class="form" method="POST">
+					{{ form }}
+					{% csrf_token %}
+					<button type="submit" name="submit" class="btn btn-primary my-4">Submit form</button>
+				</form>
+			</div>
+			<!-- <div class="col">
+				<form class="form" method="POST">
+					{% csrf_token %}
+					<input type="text" name="fullname" placeholder="fullname" class="form-control">
+					<input type="email" name="email" placeholder="email" class="form-control">
+					<textarea class="form-control" name="description" placeholder="description"></textarea>
+					<input type="submit" name="submit" class="btn btn-primary">
+				</form>
+			</div> -->
+		</div>
+	</div>
+{% endblock content %}

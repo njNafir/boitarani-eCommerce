@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Products list{% endblock title %}
+
+{% block content %}
+	
+	<div class="container">
+		<main class="main products_main">
+			<div class="row">
+				<div class="products_wrapper w-100">
+					
+					{% for product in object_list %}
+
+						<div class="col-sm-12 col-md-6 col-lg-4 float-left">
+							<div class="single_product">
+								{% include 'products/snippets/cards.html' with instance=product.content_object %}
+							</div>
+
+						{% if forloop.counter|divisibleby:3 %}
+							</div></div><div class="row"><div class="col-12"><hr></div>
+						{% else %}
+							</div>
+						{% endif %}
+
+					{% endfor %}
+
+				</div>
+			</div>
+		</main>
+	</div>
+
+{% endblock content %}

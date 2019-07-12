@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}My purchased product and details...{% endblock title %}
+
+{% block content %}
+
+<div class="cart-wrapper container">
+	<div class="row">
+		<div class="col">
+			<h1 class="title text-center">{{ title }}</h1>
+				<div class="cart_object_list">
+					<table class="table my-5">
+						<thead class="table-head">
+							<th class="table-head">Descending</th>
+							<th class="table-head">Product</th>
+							<th class="table-head">Download</th>
+						</thead>
+						<tbody class="tbody">
+							{% for object in object_list %}
+								<tr class="table-row object">
+									<td class="table_data object-price">{{ forloop.counter }}</td>
+									<td class="table_data"><a href="{{ object.get_product_detail_url }}" class="object-id">{{ object.title }}</a></td>
+									<td class="table_data">
+									{% if object.get_downloads.exists %}
+										{% for q in object.get_downloads %}
+											<a href="{{ q.get_download_url }}">{{ q.display_name }}</a>
+											{% if not forloop.last %}, <br>{% endif %}
+										{% endfor %}
+									{% else %}
+										No downloadable file available.
+									{% endif %}
+								</td>
+								</tr>	
+							{% empty %}
+								<tr class="table-row object">
+									<td class="table_data text-center" colspan="3">No object yet<hr></td>
+								</tr>							
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

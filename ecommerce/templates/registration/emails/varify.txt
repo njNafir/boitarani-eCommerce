@@ -1,0 +1,13 @@
+Hello!
+
+Welcome to Boitarani!
+
+Confirm your email address {{ email }} , then you can login to Boitarani.
+
+Confirm at this link {{ path }}
+
+Confirm and get extra facility!
+
+Thank you!
+
+Boitarani group.

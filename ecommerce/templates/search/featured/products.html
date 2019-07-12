@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Featured products{% endblock title %}
+
+{% block content %}
+	
+	<div class="container">
+		<main class="main featured_products_main">
+			<div class="row">
+				<div class="featured_products_wrapper w-100">
+					
+					{% for product in products %}
+
+						<div class="col-sm-12 col-md-6 col-lg-4 float-left">
+							<div class="single_product">
+								<header class="single_product_header">
+									<h2 class="title"><a href="{{ product.get_featured_product_detail_url }}">{{ product.title }}</a></h2>
+								</header>
+								<div class="single_product_body">
+									<p class="description">{{ product.description|truncatewords:18 }}</p>
+								</div>
+							</div>
+						</div>
+
+					{% endfor %}
+
+				</div>
+			</div>
+		</main>
+	</div>
+	
+{% endblock content %}

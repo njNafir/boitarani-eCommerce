@@ -1,0 +1,12 @@
+<div class="card mx-0 px-0" style="height: 0%;height: 550px;">
+	{% if instance.image %}
+		<a href="{{ instance.get_product_detail_url }}"><img src="{{ instance.image.url }}" class="card-img-top img img-fluid" alt="{{ instance.title }} logo" style="height: 0%;height: 240px;"></a>
+	{% endif %}
+	<div class="card-body" style="margin-bottom: auto;">
+		<h5 class="card-title">{{ instance.title }}</h5>
+		<h6 class="meta">{{ product.timestamp|timesince }}</h6>
+		<p class="card-text">{{ instance.description|truncatewords:12 }}</p>
+		<a href="{{ instance.get_product_detail_url }}" class="btn btn-secondary d-block">View details</a>
+		{% include 'products/snippets/cart_update.html' with product=instance cart=cart %}
+	</div>
+</div>

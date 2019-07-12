@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout page{% endblock title %}
+
+{% block content %}
+	
+<div class="container">
+	{{ object.order_id }}  ---  {{ object.cart }}
+	{% if not billing_profile %}
+		<div class="checkout_wrapper">
+			<div class="row text-center">
+				<div class="col-12 col-md-6">
+					{% include 'carts/snippets/login.html' with form=login_form next_url=request.build_absolute_uri %}
+				</div>
+				<div class="col-12 col-md-6">
+					{% url 'guest_register' as guest_register %}
+					{% include 'carts/snippets/login.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register %}
+				</div>
+			</div>
+		</div>
+	{% else %}
+		{% if not object.shipping_address and shipping_address_required %}
+			<div class="address_form_wrapper">
+				<div class="address_form">
+					<div class="row">
+						<div class="col-12 col-md-10 col-lg-8 offset-0 offset-md-1 offset-lg-2">
+							<header class="address_form_header">
+								<p class="description">Shipping address</p>
+								<hr>
+							</header>
+							<div class="row">
+								<div class="col-12 col-md-8">
+									{% url 'address_create' as address_create %}
+									{% include 'addresses/snippets/form.html' with form=address_form next_url=request.build_absolute_uri address_type='shipping' action_url=address_create %}
+								</div>
+								<div class="col-12 col-md-4">
+									{% url 'address_reuse' as address_reuse %}
+									{% include 'addresses/reuse_address.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=address_reuse %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% elif not object.billing_address %}
+			<div class="address_form_wrapper">
+				<div class="address_form">
+					<div class="row">
+						<div class="col-12 col-md-10 col-lg-8 offset-0 offset-md-1 offset-lg-2">
+							<header class="address_form_header">
+								<p class="description">Billing address</p>
+								<hr>
+							</header>
+							<div class="row">
+								<div class="col-12 col-md-8">
+									{% url 'address_create' as address_create %}
+									{% include 'addresses/snippets/form.html' with form=address_form next_url=request.build_absolute_uri address_type='billing' action_url=address_create %}
+								</div>
+								<div class="col-12 col-md-4">
+									{% url 'address_reuse' as address_reuse %}
+									{% include 'addresses/reuse_address.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_url=address_reuse %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="checkout_wrapper">
+			<div class="checkout">
+			<div class="row">
+			<div class="col">
+			<main class="checkout_main">
+				{% if not has_card %}
+
+				<div class="stripe-payment-form" data-token='{{ publish_key }}' data-next-url='{{request.build_absolute_uri}}' data-btn-title='Add payment method'></div>
+
+				{% else %}
+				<header class="checkout_main_header text-center">
+					<h4 class="title">Finalized Checkout</h4>
+				</header>
+				<table class="table my-5">
+					<thead class="table-head">
+						<th class="table-head">Type</th>
+						<th class="table-head">Info</th>
+					</thead>
+					<tbody class="tbody">	
+						<tr class="table-row">
+							<td class="table-data">Shipping address</td>
+							<td class="table-data">{{ object.shipping_address.get_address }}</td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Billing address</td>
+							<td class="table-data">{{ object.billing_address.get_address }}</td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Cart products</td>
+							<td class="table-data">{% for product in object.cart.products.all %}{{ product }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Payment method</td>
+							<td class="table-data">{{ billing_profile.default_card }} <a href="{{ billing_profile.get_peyment_method_url }}?next={{ request.build_absolute_uri }}">(Change)</a></td>
+						</tr>	
+						<tr class="table-row">
+							<td class="table-data">Cart total</td>
+							<td class="table-data">{{ object.cart.total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Shipping total</td>
+							<td class="table-data">{{ object.shipping_total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data">Total</td>
+							<td class="table-data">{{ object.total }}</td>
+						</tr>
+						<tr class="table-row">
+							<td class="table-data text-center" colspan="3">
+								<form class="form" method="POST" action="">
+									{% csrf_token %}
+									<button type="submit" class="btn btn-success">Checkout</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endif %}
+			</main>
+			</div>
+			</div>
+			</div>
+			</div>
+		{% endif %}
+	{% endif %}
+</div>
+
+{% endblock content %}

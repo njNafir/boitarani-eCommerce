@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Products list{% endblock title %}
+
+{% block content %}
+	
+	<div class="container-fluid">
+		<main class="main products_main">
+			<div class="row no-gutters">
+				<div class="products_wrapper">
+					
+					{% for product in object_list %}
+
+						<div class="col-sm-6 col-md-3 col-lg-2 float-left no-gutters px-0 my-4">
+							<div class="single_product">
+								{% include 'products/snippets/cards.html' with instance=product %}
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</main>
+	</div>
+
+{% endblock content %}

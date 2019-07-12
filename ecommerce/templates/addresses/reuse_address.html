@@ -1,0 +1,26 @@
+{% if request.user.is_authenticated %}
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<form class="form" method="POST" action="{% if action_url %}{{ action_url }}{% else %}{% url 'login_page' %}{% endif %}">
+					{% if next_url %}
+						<input type="hidden" name="next" value="{{ next_url }}">
+					{% endif %}
+					{% if address_type %}
+						<input type="hidden" name="address_type" value="{{ address_type }}">
+					{% endif %}
+					{% if address_qs.exists %}
+						{% for address in address_qs %}
+							<label for="address-{{ address.id }}">
+								<input id="address-{{ address.id }}" type="radio" name="{{ address_type }}" value="{{ address.id }}">
+								{{ address.address_line_1 }}
+							</label><br>
+						{% endfor %}
+					{% endif %}
+					{% csrf_token %}
+					<input type="submit" name="submit" class="btn btn-secondary mt-4 mb-5 py-2 px-4" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endif %}

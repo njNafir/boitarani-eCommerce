@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% url 'featured_product_list' as featured %}
+{% url 'search_product' as search_product %}
+{% url 'search_featured_product' as featured_search %}
+
+{% block title %}Products list{% endblock title %}
+
+{% block content %}
+	
+	<div class="container">
+		<main class="main products_main">
+			{% if query %}
+				<div class="row">
+					<div class="col-12">
+						Sowing result for {{ query }}
+						<hr>
+					</div>
+				</div>
+			{% else %}
+				<div class="row my-3 w-100">
+					<div class="px-auto mx-auto col-12 col-md-8 py-4">
+						{% if request.path == featured %}
+							{% include 'search/snippets/search_form.html' with search=featured_search %}
+						{% else %}
+							{% include 'search/snippets/search_form.html' with search=search_product %}
+						{% endif %}
+					</div>
+					<div class="col-12"><span class="sr-only">(divider)</span><hr></div>
+				</div>
+			{% endif %}
+			<div class="row">
+				<div class="products_wrapper w-100">
+					
+					{% for product in products %}
+
+						<div class="col-sm-12 col-md-6 col-lg-4 float-left">
+							<div class="single_product">
+								{% include 'products/snippets/cards.html' with instance=product %}
+							</div>
+
+						{% if forloop.counter|divisibleby:3 %}
+							</div></div><div class="row"><div class="col-12"><hr></div>
+						{% else %}
+							</div>
+						{% endif %}
+
+					{% endfor %}
+
+				</div>
+			</div>
+		</main>
+	</div>
+
+{% endblock content %}
