@@ -39,42 +39,6 @@
 						</div>
 					</div>
 				{% endif %}
-				{% if vagitable is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="vagitable_category">
-							<div class="vagitable">
-								{% for obj in vagitable %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{% static 'img/book.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'VagitableListView' %}"><h2 class="title">Vagitable</h2></a>
-							</div>
-						</div>
-					</div>
-				{% endif %}
-				{% if vagitable is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="vagitable_category">
-							<div class="vagitable">
-								{% for obj in vagitable %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{% static 'img/electronic.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'VagitableListView' %}"><h2 class="title">Vagitable</h2></a>
-							</div>
-						</div>
-					</div>
-				{% endif %}
 
 				{% if book is not None %}
 					<div class="col-md-4 col-lg-3 float-left">
@@ -132,7 +96,6 @@
 						</div>
 					</div>
 				{% endif %}
-
 				{% if womens_fashion is not None %}
 					<div class="col-md-4 col-lg-3 float-left">
 						<div class="womens_fashion_category">
@@ -165,7 +128,7 @@
 										{% endif %}
 									{% endif %}
 								{% endfor %}
-								<a href="{% url 'HomeAppliencesListView' %}"><h2 class="title">Home applience</h2></a>
+								<a href="{% url 'HomeAppliencesListView' %}"><h2 class="title">Womens fashion</h2></a>
 							</div>
 						</div>
 					</div>
@@ -184,7 +147,7 @@
 										{% endif %}
 									{% endif %}
 								{% endfor %}
-								<a href="{% url 'HelthListView' %}"><h2 class="title">Helth category</h2></a>
+								<a href="{% url 'HelthListView' %}"><h2 class="title">Helth</h2></a>
 							</div>
 						</div>
 					</div>
@@ -203,7 +166,7 @@
 										{% endif %}
 									{% endif %}
 								{% endfor %}
-								<a href="{% url 'OutdoorListView' %}"><h2 class="title">Outdoor</h2></a>
+								<a href="{% url 'OutdoorListView' %}"><h2 class="title">Helth</h2></a>
 							</div>
 						</div>
 					</div>
