@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<style>
+	.home_page_product_category{
+		opacity: 0.95;
+		transition: all 0.2s;
+	}.home_page_product_category:hover{
+		opacity: 1;
+	}
+</style>
+<div class="col-md-4 col-lg-3 float-left home_page_product_category" style="height: 500px;border: 1px solid #FFC107;padding: 0.1rem;">
+	<div class="{{ title }}_category title_category">
+		<div class="{{ title }} title">
+			{% for obj in type %}
+				{% if forloop.counter == 1 %}
+					{% if obj.image %}
+						<img class="img-fluid" src="{{ obj.image.url }}" style="height: 415px;max-height: 415px;width: 100%;">
+					{% else %}
+						<img class="img-fluid" src="{% static 'img' %}/{{ title }}.jpg" style="height: 415px;max-height: 415px;width: 100%;">
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+			<h2 class="title" style="padding: 2rem 1rem;text-transform: uppercase;">{% if title %}{{ title }}{% endif %}</h2>
+		</div>
+	</div>
+</div>

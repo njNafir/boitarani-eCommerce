@@ -108,11 +108,11 @@ class Order(models.Model):
 			('shipped', 'Shipped'),
 			('refunded', 'Refunded')
 		)
-	billing_profile 	= models.ForeignKey(BillingProfile, on_delete='billing_profile', blank=True, null=True)
+	billing_profile 	= models.ForeignKey(BillingProfile, on_delete=models.CASCADE, blank=True, null=True)
 	order_id 			= models.CharField(max_length=120, blank=True)
-	shipping_address	= models.ForeignKey(Address, related_name='shipping_address', on_delete='shipping_address', null=True, blank=True)
-	billing_address		= models.ForeignKey(Address, related_name='billing_address', on_delete='billing_address', null=True, blank=True)
-	cart 				= models.ForeignKey(Cart, on_delete='cart')
+	shipping_address	= models.ForeignKey(Address, related_name='shipping_address', on_delete=models.CASCADE, null=True, blank=True)
+	billing_address		= models.ForeignKey(Address, related_name='billing_address', on_delete=models.CASCADE, null=True, blank=True)
+	cart 				= models.ForeignKey(Cart, on_delete=models.CASCADE)
 	status 				= models.CharField(max_length=120, default='created', choices=STATUS_CHOICES)
 	shipping_total 		= models.DecimalField(default=29.99, max_digits=20, decimal_places=2)
 	total 				= models.DecimalField(default=0.00, max_digits=20, decimal_places=2)
@@ -250,8 +250,8 @@ class ProductPurchaseManager(models.Manager):
 
 class ProductPurchase(models.Model):
 	order_id 			= models.CharField(max_length=120)
-	billing_profile 	= models.ForeignKey(BillingProfile, on_delete='billing_profile') # billing_profile.productpurchase_set.all()
-	product 			= models.ForeignKey(Product, on_delete='product') # product.productpurchase_set.all()
+	billing_profile 	= models.ForeignKey(BillingProfile, on_delete=models.CASCADE) # billing_profile.productpurchase_set.all()
+	product 			= models.ForeignKey(Product, on_delete=models.CASCADE) # product.productpurchase_set.all()
 	refunded 			= models.BooleanField(default=False)
 	updated 			= models.DateTimeField(auto_now=True)
 	timestamp 			= models.DateTimeField(auto_now_add=True)

@@ -33,7 +33,7 @@ class BillingProfileManager(models.Manager):
 
 
 class BillingProfile(models.Model):
-	user 		= models.ForeignKey(User, unique=True, null=True, blank=True, on_delete='user')
+	user 		= models.ForeignKey(User, unique=True, null=True, blank=True, on_delete=models.CASCADE)
 	email 		= models.EmailField()
 	active 		= models.BooleanField(default=True)
 	created 	= models.DateTimeField(auto_now_add=True)
@@ -122,7 +122,7 @@ class CardManager(models.Manager):
 		return None
 
 class Card(models.Model):
-	billing_profile = models.ForeignKey(BillingProfile, on_delete='billing_profile')
+	billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
 	stripe_id 		= models.CharField(max_length=120)
 	brand 			= models.CharField(max_length=120, blank=True, null=True)
 	country 		= models.CharField(max_length=20, blank=True, null=True)
@@ -177,7 +177,7 @@ class ChargeManager(models.Manager):
 		return new_charge_obj.paid, new_charge_obj.seller_message
 
 class Charge(models.Model):
-	billing_profile = models.ForeignKey(BillingProfile, on_delete='billing_profile')
+	billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
 	stripe_id 		= models.CharField(max_length=120)
 	paid 			= models.BooleanField(default=False)
 	refunded 		= models.BooleanField(default=False)

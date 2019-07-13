@@ -179,7 +179,7 @@ def upload_product_file_path(instance, filename):
 
 class ProductFile(models.Model):
 	name 				= models.CharField(max_length=120, blank=True, null=True)
-	product 			= models.ForeignKey(Product, on_delete='product')
+	product 			= models.ForeignKey(Product, on_delete=models.CASCADE)
 	file 				= models.FileField(
 											upload_to=upload_product_file_path, 
 											storage=FileSystemStorage(location=settings.PREM_PRO_ROOT)

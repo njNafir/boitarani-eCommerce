@@ -8,7 +8,11 @@
 {% block staticcss %}
 
 	<link rel="stylesheet" type="text/css" href="{% static 'ecomapp/css/home_page.css' %}">
-
+	<style>
+		a{
+			color: #819BE7;
+		}
+	</style>
 {% endblock staticcss %}
 
 {% block navbar %}
@@ -22,154 +26,50 @@
 		<div class="row">
 			<div class="col-12">
 				{% if vagitable is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="vagitable_category">
-							<div class="vagitable">
-								{% for obj in vagitable %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'VagitableListView' %}"><img class="img-fluid" src="{% static 'img/vagitable.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'VagitableListView' %}"><h2 class="title">Vagitable</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'VagitableListView' %}">
+						{% include 'pages/snippets/category.html' with type=vagitable title='vagitable' %}
+					</a>
 				{% endif %}
 
 				{% if book is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="book_category">
-							<div class="book">
-								{% for obj in book %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'BookListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'BookListView' %}"><img class="img-fluid" src="{% static 'img/book.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'BookListView' %}"><h2 class="title">Book</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'BookListView' %}">
+						{% include 'pages/snippets/category.html' with type=book title='book' %}
+					</a>
 				{% endif %}
 
 				{% if electronic is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="electronic_category">
-							<div class="electronic">
-								{% for obj in electronic %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'ElectronicListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'ElectronicListView' %}"><img class="img-fluid" src="{% static 'img/electronic.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'ElectronicListView' %}"><h2 class="title">Electronics</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'ElectronicListView' %}">
+						{% include 'pages/snippets/category.html' with type=electronic title='electronic'  %}
+					</a>
 				{% endif %}
 
 				{% if mens_fashion is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="mens_fashion_category">
-							<div class="mens_fashion">
-								{% for obj in mens_fashion %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'MensFasionListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'MensFasionListView' %}"><img class="img-fluid" src="{% static 'img/mens_fashion.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'MensFasionListView' %}"><h2 class="title">Mens fashion</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'MensFasionListView' %}">
+						{% include 'pages/snippets/category.html' with type=mens_fashion title='mens_fashion' %}
+					</a>
 				{% endif %}
 				{% if womens_fashion is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="womens_fashion_category">
-							<div class="womens_fashion">
-								{% for obj in womens_fashion %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'WomanFasionListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'WomanFasionListView' %}"><img class="img-fluid" src="{% static 'img/womens_fashion.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'WomanFasionListView' %}"><h2 class="title">Womens fashion</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'WomanFasionListView' %}">
+						{% include 'pages/snippets/category.html' with type=womens_fashion title='womens_fashion' %}
+					</a>
 				{% endif %}
 
 				{% if home_appliences is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="home_appliences_category">
-							<div class="home_appliences">
-								{% for obj in home_appliences %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'HomeAppliencesListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'HomeAppliencesListView' %}"><img class="img-fluid" src="{% static 'img/home_appliences.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'HomeAppliencesListView' %}"><h2 class="title">Womens fashion</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'HomeAppliencesListView' %}">
+						{% include 'pages/snippets/category.html' with type=home_appliences title='home_appliences' %}
+					</a>
 				{% endif %}
 
 				{% if helth is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="helth_category">
-							<div class="helth">
-								{% for obj in helth %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'HelthListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'HelthListView' %}"><img class="img-fluid" src="{% static 'img/helth.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'HelthListView' %}"><h2 class="title">Helth</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'HelthListView' %}">
+						{% include 'pages/snippets/category.html' with type=helth title='helth' %}
+					</a>
 				{% endif %}
 
 				{% if outdoor is not None %}
-					<div class="col-md-4 col-lg-3 float-left">
-						<div class="outdoor_category">
-							<div class="outdoor">
-								{% for obj in outdoor %}
-									{% if forloop.counter == 1 %}
-										{% if obj.image %}
-											<a href="{% url 'OutdoorListView' %}"><img class="img-fluid" src="{{ obj.image.url }}"></a>
-										{% else %}
-											<a href="{% url 'OutdoorListView' %}"><img class="img-fluid" src="{% static 'img/outdoor.jpg' %}"></a>
-										{% endif %}
-									{% endif %}
-								{% endfor %}
-								<a href="{% url 'OutdoorListView' %}"><h2 class="title">Helth</h2></a>
-							</div>
-						</div>
-					</div>
+					<a href="{% url 'OutdoorListView' %}">
+						{% include 'pages/snippets/category.html' with type=outdoor title='outdoor' %}
+					</a>
 				{% endif %}
 			</div>
 		</div>	

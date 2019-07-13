@@ -7,17 +7,19 @@
 	<div class="container-fluid">
 		<main class="main products_main">
 			<div class="row no-gutters">
-				<div class="products_wrapper">
-					
-					{% for product in object_list %}
+				<div class="col-12">
+					<div class="products_wrapper">
+						
+						{% for product in object_list %}
 
-						<div class="col-sm-6 col-md-3 col-lg-2 float-left no-gutters px-0 my-4">
-							<div class="single_product">
-								{% include 'products/snippets/cards.html' with instance=product %}
+							<div class="col-sm-6 col-md-3 col-lg-2 float-left px-0 my-4">
+								<div class="single_product">
+									{% include 'products/snippets/cards.html' with instance=product %}
+								</div>
 							</div>
-						</div>
-					{% endfor %}
+						{% endfor %}
 
+					</div>
 				</div>
 			</div>
 		</main>

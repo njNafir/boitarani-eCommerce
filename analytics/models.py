@@ -33,9 +33,9 @@ class ObjectViewedManager(models.Manager):
 
 class ObjectViewed(models.Model):
 
-	user 			= models.ForeignKey(User, blank=True, null=True, on_delete='user') # user instance instance.id
+	user 			= models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE) # user instance instance.id
 	ip_address 		= models.CharField(max_length=220, blank=True, null=True) # get user ip address 
-	content_type 	= models.ForeignKey(ContentType, on_delete='content_type') # Content type like User, Product, Order, Cart, Address etc
+	content_type 	= models.ForeignKey(ContentType, on_delete=models.CASCADE) # Content type like User, Product, Order, Cart, Address etc
 	object_id 		= models.PositiveIntegerField() # For Content type specific content like User id, Product id, Order id, Cart id, Address id etc
 	content_object 	= GenericForeignKey('content_type', 'object_id') # Create a object with content type and specific content of this type
 	timestamp 		= models.DateTimeField(auto_now_add=True)
@@ -72,7 +72,7 @@ object_viewed_signal.connect(object_viewed_reciever)
 
 
 class UserSession(models.Model):
-	user 			= models.ForeignKey(User, blank=True, null=True, on_delete='user')
+	user 			= models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 	ip_address 		= models.CharField(max_length=220, blank=True, null=True)
 	session_key 	= models.CharField(max_length=100, blank=True, null=True)
 	timestamp 		= models.DateTimeField(auto_now_add=True)
