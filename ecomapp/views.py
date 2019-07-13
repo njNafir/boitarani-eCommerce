@@ -28,6 +28,7 @@ def home_page(request):
 	
 	if request.user.is_authenticated:
 		context['premium_content'] = 'This is premium content'
+		context['title'] = 'Boitarani-Ecommerce | Your best choice !'
 	return render(request, 'pages/home_page.html', context)
 
 def contact_page(request):
