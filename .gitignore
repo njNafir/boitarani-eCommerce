@@ -1,6 +1,6 @@
 # http://kirr.co/moo1b0
 
-ecommerce/settings/local.py
+# ecommerce/settings/local.py
 # ecommerce/settings/production.py
 static_my_proj
 static_my_scss
